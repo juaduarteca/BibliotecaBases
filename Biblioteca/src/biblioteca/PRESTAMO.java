@@ -17,6 +17,7 @@ import java.util.Date;
  * @author Julian Andres Duarte
  */
 public class PRESTAMO extends javax.swing.JFrame {
+     public static operaciones oper = new operaciones();
 
     /**
      * Creates new form PRESTAMO
@@ -24,13 +25,7 @@ public class PRESTAMO extends javax.swing.JFrame {
     public PRESTAMO() {
         initComponents();
     }
-    public  static String fechaActual()
-    {
-        Date fecha = new Date();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY/MM/dd");
-        
-        return formatoFecha.format(fecha);   
-    }
+   
     public Date sumarFecha(Date fecha, int dias)
     {   
         Calendar calendar = Calendar.getInstance();
@@ -46,26 +41,7 @@ public class PRESTAMO extends javax.swing.JFrame {
         String convertido = fechaHora.format(fecha1);
         return convertido;   
     }
-    public  Date obtener()
-    {   
-        Date date = null;
-        textFechaPrestamo.setText(fechaActual());
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-        String dateInString = textFechaPrestamo.getText();
-
-        try {
-
-            date = formatter.parse(dateInString);
-            System.out.println(date);
-            System.out.println(formatter.format(date));
-            return date;
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return date;
-        
-    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -88,12 +64,11 @@ public class PRESTAMO extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         text_entrega = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        textFechaPrestamo = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(102, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("PRESTAMO");
@@ -134,14 +109,12 @@ public class PRESTAMO extends javax.swing.JFrame {
 
         text_entrega.setText("jLabel7");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("PRESTAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        textFechaPrestamo.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -160,22 +133,24 @@ public class PRESTAMO extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(jLabel3))
-                        .addGap(48, 48, 48)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(boxTipoUsu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(text_id_prestamo)
-                            .addComponent(text_codigo_usu)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(text_entrega, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textFechaPrestamo)
-                                .addGap(28, 28, 28))
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(48, 48, 48)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(boxTipoUsu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(text_id_prestamo)
+                                    .addComponent(text_codigo_usu)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(text_entrega, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                                        .addGap(82, 82, 82))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addGap(82, 82, 82)))))))
                 .addGap(81, 81, 81))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,11 +179,10 @@ public class PRESTAMO extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(text_entrega)
-                    .addComponent(textFechaPrestamo))
-                .addGap(18, 18, 18)
+                    .addComponent(text_entrega))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,13 +220,15 @@ public class PRESTAMO extends javax.swing.JFrame {
     {
         case 0:
             text_co_usu.setText("DEPARTAMENTO");
-            obtener();
+            text_entrega.setText(aumentoFecha());
             
             
             
             break;
         case 1:
             text_co_usu.setText("CARRERA");
+            text_entrega.setText(aumentoFecha());
+            
             break;
             
         
@@ -264,7 +240,22 @@ public class PRESTAMO extends javax.swing.JFrame {
     }//GEN-LAST:event_text_codigo_usuActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+               
+    switch (boxTipoUsu.getSelectedIndex())
+    {
+        case 0:
+            oper.ingreso(String.format("insert into prestamo values(%d,%d,%d,'%s','%s')",Integer.parseInt(this.text_id_prestamo.getText()),Integer.parseInt(this.text_codigo_usu.getText()),0,this.jDateChooser1.getDateFormatString(),this.text_entrega.getText()));
+            
+            
+            
+            break;
+        case 1:
+            
+            
+            break;
+            
+        
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -312,7 +303,6 @@ public class PRESTAMO extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel textFechaPrestamo;
     private javax.swing.JLabel text_co_usu;
     private javax.swing.JTextField text_codigo_usu;
     private javax.swing.JLabel text_entrega;
